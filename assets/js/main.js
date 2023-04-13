@@ -51,7 +51,7 @@ for (let i = 0; i < arrayImg.length; i++) {
             <img src="${currentImg.image}" class="img" alt="..."> 
             <div class="testo">
                 <h5>${currentImg.title}</h5>
-                <p>${currentImg.text}</p>
+                <strong>${currentImg.text}</strong>
             </div>    
         </div> 
     `
@@ -91,28 +91,41 @@ prev.addEventListener('click', function(){
 
     document.querySelector('.d-none.active').classList.remove('active')
     imgMain.querySelectorAll('.d-none')[activeImg].classList.add('active')
+
+    document.querySelector('.thumbnail.opacity1').classList.remove('opacity1')
+    thumbMain.querySelectorAll('.thumbnail')[activeImg].classList.add('opacity1')
 })
 
-const interval = setInterval (autoChange, 3000)
-
-function autoChange () {
-    let currentImg = arrayImg[activeImg]
-    let img = document.querySelector('.img') 
-    
-
-    if( activeImg == arrayImg.length - 1) {
-        activeImg = 0;
-    } else {
-        activeImg++
-    }
+document.getElementById('play').addEventListener('click', function () {
+    let auto = setInterval(play, 2000)
+    function play(){
         
-    img.src = currentImg.image
-}
+        let img = document.querySelector('.img')
+        let currentImg = arrayImg[activeImg]
+        if( activeImg == arrayImg.length - 1) {
+            activeImg = 0;
+        } else {
+            activeImg++
+        }
+        img.src = currentImg.image
+        imgMain.innerHTML += `  
+            <div class="d-none">
+                <img src="${currentImg.image}" class="img" alt="..."> 
+                <div class="testo">
+                    <h5>${currentImg.title}</h5>
+                    <strong>${currentImg.text}</strong>
+                </div>    
+            </div> 
+        `
+        document.querySelector('.d-none.active').classList.remove('active')
+        imgMain.querySelectorAll('.d-none')[activeImg].classList.add('active')
+        document.querySelector('.thumbnail.opacity1').classList.remove('opacity1')
+        thumbMain.querySelectorAll('.thumbnail')[activeImg].classList.add('opacity1')
+    }
 
-function stopAutoChange () {
-    clearInterval (interval)
-}
+    document.getElementById('stop').addEventListener('click', function () {
+        clearInterval(auto)
+    })
+})
 
-function playAutoChange () {
-    setInterval (autoChange, 3000)
-}
+

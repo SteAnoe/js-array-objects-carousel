@@ -91,7 +91,8 @@
     position: absolute;
     bottom: 5px;
     left: 5px;
-    color: white;
+    color: red;
+    font-size: 20px;
 }
 
 .opacity0-5{
