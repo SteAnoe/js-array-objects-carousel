@@ -38,9 +38,7 @@ const arrayImg = [
 ];
 
 
-let prev = document.querySelector('.prev');
-let next = document.querySelector('.next');
-console.log(prev, next);
+
 let activeImg = 0;
 const imgMain = document.querySelector('.slider')
 const thumbMain = document.querySelector('.thumbnails')
@@ -59,17 +57,16 @@ for (let i = 0; i < arrayImg.length; i++) {
     `
 
     thumbMain.innerHTML += `  
-        <div class="thumbnail">
-            <img id=thumb${i} src="${currentImg.image}" class="" alt="...">
+        <div class="thumbnail opacity0-5">
+            <img id=thumb${i} src="${currentImg.image}"  class="" alt="...">
         </div>
     `
-
-
-    
-
 }
 
+thumbMain.querySelectorAll('.thumbnail')[activeImg].classList.add('opacity1')
 imgMain.querySelectorAll('.d-none')[activeImg].classList.add('active')
+let prev = document.querySelector('.prev');
+let next = document.querySelector('.next');
 
 next.addEventListener('click', function(){
     if( activeImg == arrayImg.length - 1) {
@@ -80,6 +77,9 @@ next.addEventListener('click', function(){
 
     document.querySelector('.d-none.active').classList.remove('active')
     imgMain.querySelectorAll('.d-none')[activeImg].classList.add('active')
+
+    document.querySelector('.thumbnail.opacity1').classList.remove('opacity1')
+    thumbMain.querySelectorAll('.thumbnail')[activeImg].classList.add('opacity1')
 })
 
 prev.addEventListener('click', function(){
@@ -93,23 +93,26 @@ prev.addEventListener('click', function(){
     imgMain.querySelectorAll('.d-none')[activeImg].classList.add('active')
 })
 
+const interval = setInterval (autoChange, 3000)
 
+function autoChange () {
+    let currentImg = arrayImg[activeImg]
+    let img = document.querySelector('.img') 
+    
 
+    if( activeImg == arrayImg.length - 1) {
+        activeImg = 0;
+    } else {
+        activeImg++
+    }
+        
+    img.src = currentImg.image
+}
 
+function stopAutoChange () {
+    clearInterval (interval)
+}
 
-// let thumbnails = document.querySelector('.thumbnails')  
-
-// for (let i = 0; i < arrayImg.length; i++) {
-//     let div = document.createElement('div');
-//     thumbnails.appendChild(div);
-//     div.classList.add('thumbnail');
-//     div.setAttribute('onclick', `changeImg(${i})`)
-//     let imgThumbnail = document.createElement('img');
-//     imgThumbnail.setAttribute('src', arrayImg[i]);
-//     div.append(imgThumbnail);
-// }
- 
-// function changeImg(num){
-//     img.src = arrayImg[num];
-//     currentImg = num;
-// }
+function playAutoChange () {
+    setInterval (autoChange, 3000)
+}
