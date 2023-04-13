@@ -21,6 +21,15 @@
     width: 100%;
 }
 
+.slider{
+    position: relative;
+}
+
+.d-none{
+    display: none;
+    position: relative;
+}
+
 .next, .prev{
     position: absolute;
     z-index: 99;
@@ -72,4 +81,15 @@
     transform: scale(1.1);
     transition: all 0.5s ease;
     opacity: 1;
+}
+
+.active{
+    display: block;
+}
+
+.testo{
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+    color: white;
 }
