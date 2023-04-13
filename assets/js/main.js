@@ -58,7 +58,7 @@ for (let i = 0; i < arrayImg.length; i++) {
 
     thumbMain.innerHTML += `  
         <div class="thumbnail opacity0-5">
-            <img id=thumb${i} src="${currentImg.image}"  class="" alt="...">
+            <img src="${currentImg.image}" class="" alt="...">
         </div>
     `
 }
@@ -128,4 +128,12 @@ document.getElementById('play').addEventListener('click', function () {
     })
 })
 
+let thumb = document.querySelectorAll('.thumbnail img')
 
+for (let i = 0; i < thumb.length; i++) {
+    thumb[i].addEventListener('click', function() {
+    let thumbSrc = thumb[i].src
+    let img = document.querySelector('.img')
+    img.src = thumbSrc
+    })
+}
