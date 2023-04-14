@@ -107,7 +107,7 @@ document.getElementById('play').addEventListener('click', function () {
         } else {
             activeImg++
         }
-        img.src = currentImg.image
+        
         imgMain.innerHTML += `  
             <div class="d-none">
                 <img src="${currentImg.image}" class="img" alt="..."> 
@@ -132,8 +132,12 @@ let thumb = document.querySelectorAll('.thumbnail img')
 
 for (let i = 0; i < thumb.length; i++) {
     thumb[i].addEventListener('click', function() {
-    let thumbSrc = thumb[i].src
-    let img = document.querySelector('.img')
-    img.src = thumbSrc
+        
+        document.querySelector('.d-none.active').classList.remove('active')
+        imgMain.querySelectorAll('.d-none')[i].classList.add('active')
+        document.querySelector('.thumbnail.opacity1').classList.remove('opacity1')
+        thumbMain.querySelectorAll('.thumbnail')[i].classList.add('opacity1')
+        activeImg = i
     })
+    
 }
